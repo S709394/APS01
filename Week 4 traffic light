@@ -1,0 +1,57 @@
+Start
+    1. Set Light State to Green + Advanced Left Green
+    2. Set CountDown to 15
+    3. Set Last Update Time to Current Time
+    4. Set Request To Walk to False
+    5. Set Waiting Cars To 0
+    6. Check if global interrupt was requested
+        A. Yes  => Go to step 12
+        B. No   => Go to step 7
+    7. Check if Light State is Solid Red
+        A. Yes  =>
+                1. Check if walk button pressed and Request To Walk is False -- or -- if Waiting Cars is 6 or greater
+                    A. Yes
+                        1. Check if walk button was pressed
+                            A. Yes => Set Request To Walk To True
+                            B. No => Go to step 7.A.1.A.2
+                        2. Check if CountDown is more than 25
+                            A. Yes => Set CountDown to 25
+                            B. No  => Go to step 8
+                    B. No   =>  Go to step 8
+        B. No   => Go to step 8
+    8. Check if countdown is 0 or less
+        A. Yes  =>
+            1. Check Light State
+           
+                A. LightState is Green + Advanced Green
+                    1. Set CountDown To 5
+                    2. Set Light State To Green + Advanced Amber
+                   
+                B. LightState is Green + Advanced Amber
+                    1. Set CountDown To 40
+                    2. Set Light State To Green
+                   
+                C. LightState is Solid Green
+                    1. Set CountDown To 10
+                    2. Set Light State To Solid Amber
+                   
+                D. LightState is Solid Amber
+                    1. Set CountDown To 70
+                    2. Set Light State To Solid Red
+                   
+                E. LightState is Solid Red
+                    1. Set CountDown To 15
+                    2. Set Light State To Green + Advanced Green
+                    3. Set Request To Walk To False
+                   
+        B. No   => Go to step 9
+    9. Set Time Difference to Current Time - Last Update Time
+    10. Check if Time difference is 1 second or greater
+        A. Yes
+            1. Set Last Update Time to Current Time
+            2. Subtract Time Difference from CountDown
+            3. Go to step 11
+        B. No   => Go to step 11
+    11. Go to step 6
+    12. Global interrupt state is active
+Stop
